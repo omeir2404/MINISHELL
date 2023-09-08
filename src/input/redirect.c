@@ -63,7 +63,7 @@ void remove_part_str(char *str, const char *remove)
 {
     char *pos = strstr(str, remove);
     if (pos != NULL) {
-        memmove(pos, pos + strlen(remove), strlen(pos + strlen(remove)) + 1);
+        ft_memmove(pos, pos + strlen(remove), strlen(pos + strlen(remove)) + 1);
     }
 }
 // char	*remove_part_str(char *str, char *remove)
