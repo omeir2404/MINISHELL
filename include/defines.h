@@ -13,11 +13,10 @@ typedef enum token_status
 
 typedef struct s_env
 {
-	char				*var;
+	char				**vars;
 	char				*value;
 	int					var_len;
 	struct s_env		*next;
-	int					unset;
 }						t_env;
 
 // typedef struct s_redirection

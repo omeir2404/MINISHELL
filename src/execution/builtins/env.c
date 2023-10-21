@@ -6,11 +6,11 @@
 /*   By: oharoon <oharoon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 15:20:50 by oharoon           #+#    #+#             */
-/*   Updated: 2023/09/04 16:56:25 by oharoon          ###   ########.fr       */
+/*   Updated: 2023/10/21 18:25:19 by oharoon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../../include/minishell.h"
 
 void print_env(t_env **list)
 {
@@ -18,7 +18,7 @@ void print_env(t_env **list)
 
 	while (current != NULL)
 	{
-		printf("%s", current->var);
+		printf("%s", current->vars[0]);
 		if (ft_isprint(current->value[0]))
 			printf("=%s\n", current->value);
 		else 
@@ -27,17 +27,15 @@ void print_env(t_env **list)
 	}
 }
 
-int builtin_env(void)
+int builtin_env(char **prompt)
 {
-	char **matrix;
-	matrix = ft_split(sh()->input, ' ');
-    if (ft_strncmp(matrix[0], "env", ft_strlen("env")))
+    if (ft_strncmp(prompt[0], "env", ft_strlen("env")))
 	    return (0);
-    if (matrix[1])
+    if (prompt[1])
     {
         printf("minishell: error: too many arguments");
         return (1);
     }
-	print_env(&sh()->env);
+	print_env(&g_shell.env);
 	return (1);
 }

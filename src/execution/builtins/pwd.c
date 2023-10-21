@@ -1,7 +1,7 @@
 // /* ************************************************************************** */
 // /*                                                                            */
 // /*                                                        :::      ::::::::   */
-// /*   exit.c                                               :+:      :+:    :+:   */
+// /*   cd.c                                               :+:      :+:    :+:   */
 // /*                                                    +:+ +:+         +:+     */
 // /*   By: oharoon <oharoon@student.42.fr>            +#+  +:+       +#+        */
 // /*                                                +#+#+#+#+#+   +#+           */
@@ -10,18 +10,11 @@
 // /*                                                                            */
 // /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../../include/minishell.h"
 
-int builtin_exit(char *prompt)
+
+int builtin_pwd()
 {
-	char **matrix;
 
-	matrix = ft_split(prompt, ' ');
-	if (!ft_strncmp(matrix[0], "exit", 5))
-	{
-        if (matrix[1])
-            printf("minishell: exit: %s: numeric argument required", matrix[1]);
-        leave(sh(), "exit", 1);
-	}
 	return (0);
 }

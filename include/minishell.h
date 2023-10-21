@@ -6,7 +6,7 @@
 /*   By: oharoon <oharoon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 09:56:11 by pvital-m          #+#    #+#             */
-/*   Updated: 2023/10/21 16:34:48 by oharoon          ###   ########.fr       */
+/*   Updated: 2023/10/21 18:22:02 by oharoon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,12 +153,12 @@ int	    setup_omeir(char **env);
 void remove_part_str(char *str, const char *remove);
 
 
-int builtins(void);
-int builtin_cd(char *prompt);
-int builtin_exit(char *prompt);
-int builtin_export(void);
-int builtin_unset(void);
-int builtin_env(void);
-int builtin_echo(void);
+int builtins(struct s_cmd *command);
+int builtin_cd(char **prompt);
+int builtin_export(char **prompt);
+int builtin_unset(char **prompt);
+int builtin_env(char **prompt);
+int builtin_echo(char **prompt);
+int builtin_pwd();
 
 #endif

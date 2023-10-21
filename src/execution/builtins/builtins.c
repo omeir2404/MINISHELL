@@ -10,7 +10,7 @@
 // /*                                                                            */
 // /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../../include/minishell.h"
 
 int builtins(struct s_cmd *command)
 {
@@ -23,14 +23,15 @@ int builtins(struct s_cmd *command)
 	}
 	if (builtin_cd(command->args) == 1)
 		return (1);
-	builtin_exit(command->args);
-	if (builtin_env() == 1)
+	if (builtin_env(command->args) == 1)
 		return (1);
-	if (builtin_export() == 1)
+	if (builtin_export(command->args) == 1)
 		return (1);
-	if (builtin_unset() == 1)
+	if (builtin_unset(command->args) == 1)
 		return (1);
-	if (builtin_echo() == 1)
+	if (builtin_echo(command->args) == 1)
+		return (1);
+	if (builtin_pwd() == 1)
 		return (1);
 	return (0);
 }

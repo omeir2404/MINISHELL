@@ -10,7 +10,7 @@
 // /*                                                                            */
 // /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../../include/minishell.h"
 
 void remove_part_str(char *str, const char *remove)
 {
@@ -22,35 +22,33 @@ void remove_part_str(char *str, const char *remove)
 
 int builtin_cd(char **prompt)
 {//OLDPWD working, but need to change oldpwd, it doesnt change for some reason
-	char **matrix;
-	char *path;
 
 	if (!prompt || !prompt[0])
 	{
 		printf("\n");
 		return (1);
 	}
-	if (!ft_strncmp(matrix[0], "cd", 2))
+	if (!ft_strncmp(prompt[0], "cd", 2))
 	{
-		if (matrix[2])
+		if (prompt[2])
 		{
 			printf("cd: too many arguments\n");
 			return (1);
 		}
-		else if (!matrix[1])
+		else if (!prompt[1])
 			chdir(getenv("HOME"));
-		else if (matrix[1][0] == '~')
+		else if (prompt[1][0] == '~')
 		{
 			chdir(getenv("HOME"));
-			if (matrix[1][1])
+			if (prompt[1][1])
 			{
-				remove_part_str(matrix[1], "~/");
-				if (chdir(matrix[1]))
+				remove_part_str(prompt[1], "~/");
+				if (chdir(prompt[1]))
 					printf("error changing directory\n");
 			}
 			return (1);
 		}
-		else if (matrix[1][0] == '-')
+		else if (prompt[1][0] == '-')
 		{
 			if (chdir(getenv("OLDPWD")))
 				printf("error changing directory\n");
@@ -58,10 +56,10 @@ int builtin_cd(char **prompt)
 		}
 		else
 		{
-			path = matrix[1];
-			if (chdir(path))
+			if (chdir(prompt[1]))
 			{
 				printf("error changing directory\n");
+				g_shell.exit = 127;
 				return (1);
 			}
 		}
@@ -69,4 +67,3 @@ int builtin_cd(char **prompt)
 	}
 	return (0);
 }
-j

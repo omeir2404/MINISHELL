@@ -10,7 +10,7 @@ void execution(char *input)
 	cmds = ft_buildlst(input);
 	software(cmds);
 	CommandDisplay(cmds);
-	
+	execute_single_comand(cmds);
 	clean_commands(&cmds);
 	free(input);
 }
