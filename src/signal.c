@@ -1,92 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pedro <pedro@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/22 08:54:48 by pedro             #+#    #+#             */
+/*   Updated: 2023/09/23 10:22:21 by pedro            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void ctrl_c(int sig)
+void	ft_ml_sigdefault(void)
 {
+	signal(SIGINT, handle_sign);
+	signal(SIGQUIT, handle_quit);
+}
+
+void	handle_quit(int sig)
+{
+	pid_t	id;
+	int		status;
+
 	(void)sig;
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-void up_arrow(int sig)
-{
-    (void)sig;
-    char *prev_command = history_get(history_length - 2)->line;
-    if (prev_command != NULL) {
-        rl_replace_line(prev_command, 0);
-        rl_redisplay();
-    }
-}
-
-void prepare_singals(t_shell *shell)
-{
-	shell->control_c.sa_handler = ctrl_c;
-	sigaction(SIGINT, &shell->control_c, NULL);
-	shell->control_back_slash.sa_handler = SIG_IGN;
-	sigaction(SIGQUIT, &shell->control_back_slash, NULL);
-	shell->up_arrow.sa_handler = up_arrow;
-	sigaction(SIGUSR1, &shell->up_arrow, NULL);
-}
-
-void clean_dptr(char **_alocated)
-{
-	int pos;
-
-	pos = 0;
-	if(!_alocated)
-		return;
-	while (_alocated[pos])
+	id = waitpid(-1, &status, 0);
+	if (id == -1)
+		(void)(SIG_IGN);
+	else if (!g_shell.hd)
 	{
-		free(_alocated[pos]);
-		pos++;
-	}
-	free(_alocated);
-}
-
-void ml_lst_cmd_clean()
-{
-
-	t_commands *cur;
-	t_commands *next;
-
-	cur = sh()->command;
-	while (cur)
-	{
-		next = cur->next;
-		clean_dptr(cur->args);
-		cur = next;
+		write(1, "Quit (core dumped)\n", 20);
+		return ;
 	}
 }
 
-void ml_env_fr()
+void	handle_sign(int sig)
 {
-	t_env *cur;
-	t_env *next;
+	pid_t	pid;
+	int		status;
 
-	cur = sh()->env;
-	int i = 0;
-	while (cur)
+	(void)sig;
+	pid = waitpid(-1, &status, 0);
+	g_shell.exit = 130;
+	write(2, "^C", 2);
+	write(2, "\n", 1);
+	if (g_shell.hd)
 	{
-		next = cur->next;
-		free(cur->value);
-		free(cur->var);
-		free(cur);
-		cur = next;
-		i++;
+		g_shell.stop = 1;
+		return ;
 	}
-}
-void leave(t_shell *shell, const char *msg, int fd)
-{
-	ml_env_fr();
-	if(sh()->paths)
-		clean_dptr(sh()->paths);
-	if (sh()->input)
-		free(sh()->input);
-	if (sh()->current_path)
-		free(sh()->current_path);
-	if(msg)
-		write(fd, msg, ft_strlen(msg));
-	write(fd, "\n", 1);
-	exit(shell->exit);
+	if (pid == -1)
+	{
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
