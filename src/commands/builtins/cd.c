@@ -12,12 +12,6 @@
 
 #include "../include/minishell.h"
 
-int builtin_cd(char *prompt)
-{//fix for $OLDPWD, cd - should go to the prvious pwd
-	char **matrix;
-	char *path;
-	
-	matrix = ft_split(prompt, ' ');
 	void remove_part_str(char *str, const char *remove)
 	{
 		char *pos = strstr(str, remove);
@@ -25,6 +19,17 @@ int builtin_cd(char *prompt)
 			ft_memmove(pos, pos + strlen(remove), strlen(pos + strlen(remove)) + 1);
 		}
 	}
+int builtin_cd(char *prompt)
+{//OLDPWD working, but need to change oldpwd, it doesnt change for some reason
+	char **matrix;
+	char *path;
+
+	if (!prompt || !prompt[0])
+	{
+		printf("\n");
+		return (1);
+	}
+	matrix = ft_split(prompt, ' ');
 	if (!ft_strncmp(matrix[0], "cd", 2))
 	{
 		if (matrix[2])
@@ -47,7 +52,7 @@ int builtin_cd(char *prompt)
 		}
 		else if (matrix[1][0] == '-')
 		{
-			if (chdir("$OLDPWD"))
+			if (chdir(getenv("OLDPWD")))
 				printf("error changing directory\n");
 			return (1);
 		}

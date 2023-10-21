@@ -6,7 +6,7 @@
 /*   By: oharoon <oharoon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 09:56:11 by pvital-m          #+#    #+#             */
-/*   Updated: 2023/09/06 19:00:42 by oharoon          ###   ########.fr       */
+/*   Updated: 2023/10/21 13:27:48 by oharoon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,13 @@ void ml_lst_env_clean(t_env **env);
 bool ml_register_syntax_report(char *str);
 
 void    redirect_funct(void);
-int	execute_single_comand(t_shell *shell, char *path, char  **env);
+int	    execute_single_comand(t_shell *shell, char *path, char  **env);
 char	*get_path(char *comand, char **env);
 void	addpath(t_env **head, char **env, int index);
 int	    setup_omeir(char **env);
+
+void remove_part_str(char *str, const char *remove);
+
 
 int builtins(void);
 int builtin_cd(char *prompt);

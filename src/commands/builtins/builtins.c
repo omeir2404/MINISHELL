@@ -16,6 +16,11 @@ int builtins(void)
 {
 	// redirect doesnt redirect printf() i think, fix!!!!!
 	redirect_funct();
+	if (!sh()->input)
+	{
+		printf("\n");
+		return (1);
+	}
 	if (builtin_cd(sh()->input) == 1)
 		return (1);
 	builtin_exit(sh()->input);

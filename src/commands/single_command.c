@@ -6,7 +6,7 @@
 /*   By: oharoon <oharoon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 12:34:25 by oharoon           #+#    #+#             */
-/*   Updated: 2023/08/22 17:10:32 by oharoon          ###   ########.fr       */
+/*   Updated: 2023/10/21 13:06:38 by oharoon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	execute_single_comand(t_shell *shell, char *path, char  **env)
 		// redirect_funct();// seperate comand from file!
 		if (execve(path, split_comand, env) == -1)
 		{
-			ft_putstr_fd("command not found: ", 2);
+			ft_putstr_fd("command not found: /n", 2);
 			ft_putendl_fd(split_comand[0], 2);
 			// free_matrix(split_comand);
 			exit(127);
