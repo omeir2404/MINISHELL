@@ -1,0 +1,99 @@
+==211343== Memcheck, a memory error detector
+==211343== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==211343== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==211343== Command: ./minishell
+==211343== Parent PID: 211341
+==211343== 
+==211652== 
+==211652== FILE DESCRIPTORS: 6 open (1 std) at exit.
+==211652== Open file descriptor 26: /home/oharoon/.vscode-server/data/logs/20231208T003501/network.log
+==211652==    <inherited from parent>
+==211652== 
+==211652== Open file descriptor 21: /dev/ptmx
+==211652==    <inherited from parent>
+==211652== 
+==211652== Open file descriptor 20: /home/oharoon/.vscode-server/data/logs/20231208T003501/remoteagent.log
+==211652==    <inherited from parent>
+==211652== 
+==211652== Open file descriptor 19: /home/oharoon/.vscode-server/data/logs/20231208T003501/ptyhost.log
+==211652==    <inherited from parent>
+==211652== 
+==211652== Open file descriptor 3: /home/oharoon/check/val.log
+==211652==    <inherited from parent>
+==211652== 
+==211652== 
+==211652== HEAP SUMMARY:
+==211652==     in use at exit: 208,544 bytes in 231 blocks
+==211652==   total heap usage: 862 allocs, 631 frees, 246,819 bytes allocated
+==211652== 
+==211652== LEAK SUMMARY:
+==211652==    definitely lost: 0 bytes in 0 blocks
+==211652==    indirectly lost: 0 bytes in 0 blocks
+==211652==      possibly lost: 0 bytes in 0 blocks
+==211652==    still reachable: 0 bytes in 0 blocks
+==211652==         suppressed: 208,544 bytes in 231 blocks
+==211652== 
+==211652== For lists of detected and suppressed errors, rerun with: -s
+==211652== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==211653== 
+==211653== FILE DESCRIPTORS: 6 open (1 std) at exit.
+==211653== Open file descriptor 26: /home/oharoon/.vscode-server/data/logs/20231208T003501/network.log
+==211653==    <inherited from parent>
+==211653== 
+==211653== Open file descriptor 21: /dev/ptmx
+==211653==    <inherited from parent>
+==211653== 
+==211653== Open file descriptor 20: /home/oharoon/.vscode-server/data/logs/20231208T003501/remoteagent.log
+==211653==    <inherited from parent>
+==211653== 
+==211653== Open file descriptor 19: /home/oharoon/.vscode-server/data/logs/20231208T003501/ptyhost.log
+==211653==    <inherited from parent>
+==211653== 
+==211653== Open file descriptor 3: /home/oharoon/check/val.log
+==211653==    <inherited from parent>
+==211653== 
+==211653== 
+==211653== HEAP SUMMARY:
+==211653==     in use at exit: 208,534 bytes in 231 blocks
+==211653==   total heap usage: 871 allocs, 640 frees, 246,937 bytes allocated
+==211653== 
+==211653== LEAK SUMMARY:
+==211653==    definitely lost: 0 bytes in 0 blocks
+==211653==    indirectly lost: 0 bytes in 0 blocks
+==211653==      possibly lost: 0 bytes in 0 blocks
+==211653==    still reachable: 0 bytes in 0 blocks
+==211653==         suppressed: 208,534 bytes in 231 blocks
+==211653== 
+==211653== For lists of detected and suppressed errors, rerun with: -s
+==211653== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==211343== 
+==211343== FILE DESCRIPTORS: 6 open (1 std) at exit.
+==211343== Open file descriptor 26: /home/oharoon/.vscode-server/data/logs/20231208T003501/network.log
+==211343==    <inherited from parent>
+==211343== 
+==211343== Open file descriptor 21: /dev/ptmx
+==211343==    <inherited from parent>
+==211343== 
+==211343== Open file descriptor 20: /home/oharoon/.vscode-server/data/logs/20231208T003501/remoteagent.log
+==211343==    <inherited from parent>
+==211343== 
+==211343== Open file descriptor 19: /home/oharoon/.vscode-server/data/logs/20231208T003501/ptyhost.log
+==211343==    <inherited from parent>
+==211343== 
+==211343== Open file descriptor 3: /home/oharoon/check/val.log
+==211343==    <inherited from parent>
+==211343== 
+==211343== 
+==211343== HEAP SUMMARY:
+==211343==     in use at exit: 208,544 bytes in 231 blocks
+==211343==   total heap usage: 867 allocs, 636 frees, 246,913 bytes allocated
+==211343== 
+==211343== LEAK SUMMARY:
+==211343==    definitely lost: 0 bytes in 0 blocks
+==211343==    indirectly lost: 0 bytes in 0 blocks
+==211343==      possibly lost: 0 bytes in 0 blocks
+==211343==    still reachable: 0 bytes in 0 blocks
+==211343==         suppressed: 208,544 bytes in 231 blocks
+==211343== 
+==211343== For lists of detected and suppressed errors, rerun with: -s
+==211343== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
