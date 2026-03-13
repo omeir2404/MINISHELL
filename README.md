@@ -1,55 +1,105 @@
 
+*This project has been created as part of the 42 curriculum by oharoon(Omeir Haroon), pedrovmota*
+
 # Minishell
 
-<p align="center">
-  <a href="https://github.com/maiadegraaf">
-    <picture>
-    <img alt="philosophers" src="https://user-images.githubusercontent.com/68693691/193606493-2969e425-6bad-44ce-97af-89fec62bee22.gif" width=500>
-    </picture>
-  </a>
-</p>
+## Description
+`minishell` is a small Bash-like shell written in C.
 
-*A mini recreation of bash.  Implementing previously learned concepts like file descriptors and processes.  Made with [Pedro Mota](https://github.com/pedrovmota).*
+The goal of this project is to understand and implement core Unix shell behavior with a strong focus on:
+- Process creation and synchronization (`fork`, `execve`, `wait*`)
+- File descriptor management (`dup`, `dup2`, `pipe`, redirections)
+- Command parsing and execution flow
+- Environment handling and shell builtins
+- Signal behavior in interactive mode
 
-## Table of Contents
-- [The Challenge](#the-challenge)
-  - [What Is Bash and How Does It Work?](#what-is-bash-and-how-does-it-work)
-- [Implementation](#implementation)
-  - [The Lexer](#the-lexer)
-  - [The Parser](#the-parser)
-  - [Builtins](#builtins)
-  - [Executor](#executor)
-    - [Expander](#expander)
-    - [Heredoc](#heredoc)
-    - [Single Command](#single-command)
-    - [Multiple Commands](#multiple-commands)
-  - [Reset](#reset)
-- [My Take Away](#my-take-away)
-- [Installation](#installation)
+The mandatory part implements the subset required by the subject:
+- Interactive prompt with history
+- Execution of commands from `PATH`, absolute paths, and relative paths
+- Quotes handling (`'` and `"`)
+- Redirections (`<`, `>`, `<<`, `>>`)
+- Pipes (`|`)
+- Environment expansion (`$VAR`) and last exit status (`$?`)
+- Builtins:
+  - `echo` (`-n`)
+  - `cd`
+  - `pwd`
+  - `export`
+  - `unset`
+  - `env`
+  - `exit`
+- Interactive signals:
+  - `Ctrl-C`: new prompt on a new line
+  - `Ctrl-D`: exit shell
+  - `Ctrl-\`: ignored
 
-## The Challange
-This is definitly one of the best/worst project I've ever made, and It wasn't just me, This project in group. The main task of this *Minishell* is to replicate the terminal unix based **Bash**. Do not get wronge with the name **'Mini'** that mean all the possibility of bash running scripts etc... Your task is to make a unix terminal to be able running basic commands, such `ls`, `cat`, `wc` including some builtins `echo`, `pwd`, `unset`, `env`, `cd` ... including 80% of the redirection such as `<`,`>`,`<<`,`>>` and multi command support.
+The project follows the 42 Minishell constraints:
+- Written in C
+- Built with `cc` and flags `-Wall -Wextra -Werror`
+- Norm-compliant
+- No memory leaks in project code
 
-# Example
+## Instructions
+
+### 1. Prerequisites
+On Linux, install development packages for `readline` and `ncurses` if they are missing.
+
+### 2. Build
+From the repository root:
 
 ```bash
-    #example 1.
-    bash $> ls
-    Dockerfile  MinishellEn.pdf  docker-compose.yml libft
-    src Makefile    README.md   inc minishell
-
-    bash $> ThisCommandShouldNotExit --name .venv
-    Bash:   ThisCommandShouldNotExit: No such file or directory 
-    bash $> echo $?
-    127
-
-    bash $> wc < .gitignore | cat
-          10      11      72
+make
 ```
 
-I think you are getting there. here is something what will help more later
+Useful Makefile targets:
+- `make` or `make all`: build `minishell`
+- `make clean`: remove object files
+- `make fclean`: remove object files and binary
+- `make re`: rebuild from scratch
 
-### Todo:
+### 3. Run
 
+```bash
+./minishell
+```
 
+Optional helper targets available in this repository:
+
+```bash
+make n     # build and run minishell
+make e     # run minishell with empty environment (env -i)
+make d     # run with valgrind and project suppressions
+make f     # run with full valgrind leak checks
+```
+
+### 4. Basic usage examples
+
+```bash
+minishell$ ls -la
+minishell$ echo "hello $USER"
+minishell$ cat < input.txt | grep minishell > output.txt
+minishell$ echo $?
+```
+
+## Technical Notes
+- The shell uses one global variable only for signal number reporting, as required by the subject.
+- Behavior for required features is aligned with Bash reference behavior.
+- Unrequired features (for mandatory), such as `;` and `\` handling outside required scope, are intentionally not implemented.
+- Memory reported as leaking from the `readline` library itself is expected and accepted by the subject; only leaks from project code are considered faults.
+
+## Bonus Part
+The subject bonus includes:
+- `&&` and `||` with parentheses for priority
+- Wildcard `*` expansion in the current working directory
+
+Bonus evaluation is valid only if all mandatory requirements are fully correct.
+
+## Resources
+
+### Project references
+- 42 Minishell subject PDF (official project requirements)
+- GNU Bash Reference Manual: https://www.gnu.org/software/bash/manual/
+- POSIX Shell Command Language: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html
+- Linux man pages: https://man7.org/linux/man-pages/
+  - `man 2 fork`, `man 2 execve`, `man 2 waitpid`, `man 2 pipe`, `man 2 dup2`, `man 7 signal`
 
